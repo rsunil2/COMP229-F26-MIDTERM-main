@@ -47,7 +47,7 @@ app.get('/api/equipment/:id', (req, res) => {
 });
 
 app.post('/api/equipment', (req, res) => {
-  // TODO: Add an equipment item to the array.
+  // DONE: Add an equipment item to the array.
   const newItem = req.body;
 
   equipment.push(newItem);
@@ -57,7 +57,15 @@ app.post('/api/equipment', (req, res) => {
 
 app.put('/api/equipment/:id', (req, res) => {
   // TODO: Update the equipment at this array index.
-  res.status(501).send('Not Implemented');
+  const id = Number(req.params.id);
+
+  if (!Number.isInteger(id) || id < 0 || id >= equipment.length) {
+    return res.status(404).json({ message: 'Equipment not found'});
+  }
+
+  equipment[id] = req.body;
+
+  res.status(200).json(equipment[id]);
 });
 
 app.delete('/api/equipment/:id', (req, res) => {
