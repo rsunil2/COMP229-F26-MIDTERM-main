@@ -56,7 +56,7 @@ app.post('/api/equipment', (req, res) => {
 });
 
 app.put('/api/equipment/:id', (req, res) => {
-  // TODO: Update the equipment at this array index.
+  // Done: Update the equipment at this array index.
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id) || id < 0 || id >= equipment.length) {
@@ -69,8 +69,16 @@ app.put('/api/equipment/:id', (req, res) => {
 });
 
 app.delete('/api/equipment/:id', (req, res) => {
-  // TODO: Remove the equipment at this array index.
-  res.status(501).send('Not Implemented');
+  // Done: Remove the equipment at this array index.
+  const id = Number(req.params.id);
+
+  if (!Number.isInteger(id) || id < 0 || id>= equipment.length) {
+    return res.status(404).json({ message: 'Equipment not found'});
+  }
+
+  const removedItem = equipment.splice(id,1)[0];
+
+  res.status(200).json(removedItem);
 });
 
 const PORT = process.env.PORT || 3000;
