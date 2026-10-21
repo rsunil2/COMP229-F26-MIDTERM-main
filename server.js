@@ -27,7 +27,7 @@ app.get('/api/equipment', (req, res) => {
 
 // Keep the filter route before /:id.
 app.get('/api/equipment/filter', (req, res) => {
-  // TODO: Return equipment matching the category query.
+  // TODO: Return equipment matching the category query. DONE
   const category = req.query.category;
 
   const filteredEquipment = equipment.filter(
