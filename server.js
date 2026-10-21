@@ -21,13 +21,13 @@ let equipment = [
 ];
 
 app.get('/api/equipment', (req, res) => {
-  // TODO: Return the full equipment array. DONE
+  // DONE: Return the full equipment array. DONE
   res.status(200).json(equipment);
 });
 
 // Keep the filter route before /:id.
 app.get('/api/equipment/filter', (req, res) => {
-  // TODO: Return equipment matching the category query. DONE
+  // DONE: Return equipment matching the category query. DONE
   const category = req.query.category;
 
   const filteredEquipment = equipment.filter(
@@ -37,13 +37,22 @@ app.get('/api/equipment/filter', (req, res) => {
 });
 
 app.get('/api/equipment/:id', (req, res) => {
-  // TODO: Return the equipment at this array index.
-  res.status(501).send('Not Implemented');
+  // done: Return the equipment at this array index.
+  const id = Number(req.params.id);
+
+  if (id < 0 || id >= equipment.length) {
+    return res.status(404).json({ message: 'Equipment not found'});
+  }
+  res.status(200).json(equipment[id]);
 });
 
 app.post('/api/equipment', (req, res) => {
   // TODO: Add an equipment item to the array.
-  res.status(501).send('Not Implemented');
+  const newItem = req.body;
+
+  equipment.push(newItem);
+
+  res.status(201).json(newItem);
 });
 
 app.put('/api/equipment/:id', (req, res) => {
