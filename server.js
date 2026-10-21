@@ -22,13 +22,18 @@ let equipment = [
 
 app.get('/api/equipment', (req, res) => {
   // TODO: Return the full equipment array. DONE
-  res.status(200).send(equipment);
+  res.status(200).json(equipment);
 });
 
 // Keep the filter route before /:id.
 app.get('/api/equipment/filter', (req, res) => {
   // TODO: Return equipment matching the category query.
-  res.status(501).send('Not Implemented');
+  const category = req.query.category;
+
+  const filteredEquipment = equipment.filter(
+    item => item.category === category
+  );
+  res.status(200).json(filteredEquipment);
 });
 
 app.get('/api/equipment/:id', (req, res) => {
