@@ -22,7 +22,7 @@ let equipment = [
 
 app.get('/api/equipment', (req, res) => {
   // TODO: Return the full equipment array. DONE
-  res.status(200).send('equipment');
+  res.status(200).send(equipment);
 });
 
 // Keep the filter route before /:id.
